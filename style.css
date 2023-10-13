@@ -1,0 +1,16 @@
+*{
+    background-color: gray;
+}
+
+#root{
+    text-align: center;
+    padding: 20px;
+}
+
+.name h1{
+    text-align: center;
+}
+
+.name h2{
+    text-align: center;
+}

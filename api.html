@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="name">
+    <h1>Archie De Vera</h1>
+    <h2>III - BSIT</h2>
+  </div>
+
+    <div id="root">
+        <div class="content">
+            <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+            <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+            <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+            <script type="text/babel">
+                const { useEffect, useState } = React;
+
+                function App() {
+                    const [data, setData] = useState([]);
+
+                    const getData = async () => {
+                        const resp = await fetch('https://api.sampleapis.com/coffee/hot');
+                        const json = await resp.json();
+                        setData(json);
+                    }
+
+                    useEffect(() => {
+                        getData();
+                    }, []);
+
+                    return (
+                        <div>
+                            <h1>Coffee Data:</h1>
+                            <p>
+                                {data.map((item, index) => (
+                                    <a key={index}>
+                                        <strong>Name:</strong> {item.title}<br />
+                                        <strong>Description:</strong> {item.description}<br />
+                                        <strong>Ingredients:</strong> {item.ingredients}<br />
+                                        {/* Display the image */}
+                                        <img src={item.image} alt={item.name} style={{ maxWidth: '200px' }} /><br /><br />
+                                    </a>
+                                ))}
+                            </p>
+                        </div>
+                    );
+                }
+
+                ReactDOM.render(<App />, document.getElementById('root'));
+            </script>
+        </div>
+    </div>
+</body>
+
+</html>
